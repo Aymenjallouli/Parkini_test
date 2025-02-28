@@ -1,0 +1,6 @@
+[submodule "Backend"]
+	path = Backend
+	url = https://github.com/PiDev-2025/Backend.git
+[submodule "Front-end-Front-Office-"]
+	path = Front-end-Front-Office-
+	url = https://github.com/PiDev-2025/Front-end-Front-Office.git
