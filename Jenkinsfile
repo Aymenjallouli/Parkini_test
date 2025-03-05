@@ -34,8 +34,8 @@
             steps {
                 script {
                     // Analyser le projet avec SonarQube
-                    def scannerHome = tool 'SonarScan'  // Utilise le sonar-scanner installé sur Jenkins
-                    withSonarQubeEnv('SonarQube') {
+                    def scannerHome = tool 'scanner'  // Utilise le sonar-scanner installé sur Jenkins
+                    withSonarQubeEnv('scanner') {
                         sh """
                             ${scannerHome}/bin/sonar-scanner \
                             -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
