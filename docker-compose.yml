@@ -1,7 +1,11 @@
-version: '3.8'
+
+
 services:
+  ### 🚀 Backend (Express.js)
   backend:  
     build: ./Backend
+    container_name: Backend
+    restart: always
     ports:
       - "5000:5000"
     depends_on:
@@ -11,20 +15,90 @@ services:
     volumes:
       - ./Backend:/app
       - /app/node_modules
+    networks:
+      - app-network
 
+  ### 🎨 Frontend (React)
   frontend:  
     build: ./Front-end-Front-Office-  
+    container_name: Front-end-Front-Office
+    restart: always
     ports:
       - "3000:80"
     depends_on:
       - backend
+    networks:
+      - app-network
 
+  ### 🌍 MongoDB
   mongo:
     image: mongo:latest
+    container_name: mongodb
+    restart: always
     ports:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
+    networks:
+      - app-network
+
+  ### 🛠️ Jenkins (CI/CD)
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    restart: always
+    user: root
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - app-network
+
+  ### 🔍 SonarQube (Analyse de Code)
+  sonarqube:
+    image: sonarqube:lts
+    container_name: sonarqube
+    restart: always
+    depends_on:
+      - postgres
+    environment:
+      SONAR_JDBC_URL: jdbc:postgresql://postgres:5432/sonar
+      SONAR_JDBC_USERNAME: sonar
+      SONAR_JDBC_PASSWORD: sonar
+    ports:
+      - "9000:9000"
+    networks:
+      - app-network
+
+  ### 🛢️ PostgreSQL (DB pour SonarQube)
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: sonar
+      POSTGRES_PASSWORD: sonar
+      POSTGRES_DB: sonar
+    networks:
+      - app-network
+
+  ### 📦 Nexus (Stockage des Artefacts)
+  nexus:
+    image: sonatype/nexus3
+    container_name: nexus
+    restart: always
+    ports:
+      - "8081:8081"
+    networks:
+      - app-network
 
 volumes:
   mongo-data:
+  jenkins_home:
+
+networks:
+  app-network:
+ 
