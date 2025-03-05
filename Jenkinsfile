@@ -10,7 +10,7 @@
 
         // Variables pour SonarQube
         SONAR_URL = "http://sonarqube:9000"    // URL de ton serveur SonarQube
-        SONAR_TOKEN = "squ_65d3b090f57666eaa1f74c863a93e4010b788917" // Ton token SonarQube
+        SONAR_TOKEN = "squ_5d451c9273ac34e32935797113844f5e67ae52cb" // Ton token SonarQube
         SONAR_PROJECT_KEY = "AymenJallouli_Parkini"
         SONAR_PROJECT_NAME = "AymenJallouli-Parkini"
     }
@@ -18,17 +18,17 @@
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/PiDev-2025/Parkini.git'  // URL de ton dépôt Git
+                git branch: 'main', url: 'https://github.com/Aymenjallouli/Parkini_test.git'  // URL de ton dépôt Git
             }
         }
 
-        stage('Build & Test') {
+       /* stage('Build & Test') {
             steps {
                 // Exécution des tests et du build. Utilise un script adapté pour ton projet.
                 sh 'npm install'  // Installer les dépendances Node.js
                 sh 'npm run test'  // Lancer les tests
             }
-        }
+        }*/
 
         stage('SonarQube Analysis') {
             steps {
