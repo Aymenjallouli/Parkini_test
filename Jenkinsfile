@@ -10,7 +10,7 @@
 
         // Variables pour SonarQube
         SONAR_URL = "http://sonarqube:9000"    // URL de ton serveur SonarQube
-        SONAR_TOKEN = "squ_5d451c9273ac34e32935797113844f5e67ae52cb" // Ton token SonarQube
+        SONAR_TOKEN = "squ_ade158460ca7ba334c038b7f5ff8408f3e74196c" // Ton token SonarQube
         SONAR_PROJECT_KEY = "AymenJallouli_Parkini"
         SONAR_PROJECT_NAME = "AymenJallouli-Parkini"
     }
